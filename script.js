@@ -7,6 +7,8 @@
     // Crea un if con i tre casi: maggiore, minore, uguale
         // Aggiungi un elemento a tips (puoi usare una funzione)
         // Modifica il contatore della classe attemps
+    // Controlla se il numero di attemps è pari a 0, in caso game over
+    
 
 
 
@@ -16,6 +18,8 @@ const numberElement = document.getElementById('number');
 const tipsElement = document.querySelector('.tips-none');
 const buttonElement = document.querySelector('button');
 const attempsElement = document.querySelector('.attemps');
+const pugElement = document.querySelector('.pug-image-none');
+const cardElement = document.getElementById('card');
 
 
 // Crea le funzioni necessarie
@@ -47,10 +51,12 @@ function toggleAttempsElement(attemps) {
     return attempsElement.appendChild(attempsChildElement);
 }
 
+
 // Crea le variabili necessarie
 let result = 0;
 let max = 100;
 let attemps = 10;
+
 
 // Fai partire la funzione random
 const randomNumber = randomNumberFunction(max);
@@ -59,9 +65,14 @@ const randomNumber = randomNumberFunction(max);
 // Al click genera un evento
 buttonElement.addEventListener('click', function(event) {
     event.preventDefault();
-    
+
+    // Modifica le dimensioni della carta a seconda del testo interno 
+    cardElement.classList.add('card-dimension-higher')
+    cardElement.classList.remove('card-dimension')
+
     // Leggi il valore inserito dall'utente
     const number = parseInt(numberElement.value);
+    if (isNaN(number)) return;
 
     console.log('randomNumber: ' + randomNumber + ' input-number: ' + number)
     

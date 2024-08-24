@@ -16,11 +16,18 @@ body {
 /* * Card */
 /* Card */
 .card {
-    width: 400px;
-    height: 200px;
     border-radius: 30px;
     padding: 20px;
     text-align: center;
+}
+
+.card-dimension {
+    width: 400px;
+    height: 150px;
+}
+
+.card-dimension-higher {
+    height: 200px;
 }
 
 /* Title */
@@ -45,4 +52,17 @@ input {
     background-color: #0077b6;
     color: white;
     border-radius: 20px;
+}
+
+
+/* * Pug */
+.pug-image-none {
+    display: none;
+}
+
+.pug-image {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
