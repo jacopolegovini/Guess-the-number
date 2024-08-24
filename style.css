@@ -1,0 +1,32 @@
+/* * General */
+body {
+    overflow-y: hidden;
+    background-color: #90e0ef;
+}
+
+.main-display {
+    height: 100vh;
+}
+
+
+/* * Utilities */
+
+
+
+/* * Card */
+/* Card */
+.card {
+    width: 400px;
+    height: 200px;
+    border-radius: 30px;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Title */
+
+
+/* Tips */
+.tips {
+    display: none;
+}
