@@ -41,17 +41,24 @@ function toggleTipsElement(higherOrLower) {
  * @returns Complete sentence
  */
 function toggleAttempsElement(attemps) {
-    const attempsChildElement = document.createElement("div");
-    const attempsChildTextElement = document.createTextNode('Ti rimangono ancora ' + attemps + ' tentativi.');
-    attempsChildElement.appendChild(attempsChildTextElement);
-    return attempsElement.appendChild(attempsChildElement);
+    if (attemps < 10) {
+        const attempsChildElement = document.createElement("div");
+        const attempsChildTextElement = document.createTextNode('Ti rimangono ancora ' + attemps + ' tentativi.');
+        attempsChildElement.appendChild(attempsChildTextElement);
+        return attempsElement.appendChild(attempsChildElement);
+    } else {
+        const attempsChildElement = document.createElement("div");
+        attempsChildElement.classList.add('test')
+        const attempsChildTextElement = document.createTextNode('Ti rimangono ancora ' + attemps + ' tentativi.');
+        attempsChildElement.appendChild(attempsChildTextElement);
+        return attempsElement.appendChild(attempsChildElement);
+    }
 }
 
 // Crea le variabili necessarie
 let result = 0;
 let max = 100;
 let attemps = 10;
-
 
 // Fai partire la funzione random
 const randomNumber = randomNumberFunction(max);
@@ -66,17 +73,22 @@ buttonElement.addEventListener('click', function(event) {
 
     console.log('randomNumber: ' + randomNumber + ' input-number: ' + number)
     
+    if (attemps !== 10) {
+        attempsElement.removeChild(attempsElement.firstElementChild);
+    }
+
     // Crea un if con i tre casi: maggiore, minore, uguale
     if (randomNumber > number) {
         const higher = 'maggiore';
         toggleTipsElement(higher)
         attemps -= 1;
-        toggleAttempsElement(attemps);
-        
+        toggleAttempsElement(attemps);        
     } else if (randomNumber < number) {
         const lower = 'minore';
         toggleTipsElement(lower)
         attemps -= 1;
+        toggleAttempsElement(attemps);
+
     } else {
         tipsElement.innerHTML = `<div>Congratulazioni!</div>`;
         location.reload();
