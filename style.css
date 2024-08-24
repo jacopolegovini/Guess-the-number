@@ -30,3 +30,15 @@ body {
 .tips {
     display: none;
 }
+
+
+/* Form */
+input {
+    border: 1px solid #0077b6;
+}
+
+.btn-css {
+    background-color: #0077b6;
+    color: white;
+    border-radius: 20px;
+}
