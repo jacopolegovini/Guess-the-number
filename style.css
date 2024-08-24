@@ -75,19 +75,6 @@ input {
 }
 
 
-/* * Pug */
-.pug-image-none {
-    display: none;
-}
-
-.pug-image {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-
 /* * Post game card */
 .post-game-card-none {
     display: none;
@@ -104,9 +91,23 @@ input {
     font-weight: bold;
 }
 
+.post-game-card-button-remove {
+    display: flex;
+    width: 250px;
+    height: 150px;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
 .btn-post-game-card-dimension {
     padding: 12px 35px;
     font-size: 1.2rem;
+}
+
+.play-again-button-none {
+    display: none;
 }
 
 /* Media query */

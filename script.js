@@ -25,7 +25,7 @@ const mainDisplayElement = document.querySelector('.main-display');
 const postGameCard = document.getElementById('post-game-card');
 const playAgainMessageElement = document.querySelector('.play-again-message');
 const playAgainButtonElement = document.querySelector('.btn-play-again');
-const notPlayAgainButtonElement = document.querySelector('.btn-play-again');
+const notPlayAgainButtonElement = document.querySelector('.btn-not-play-again');
 
 
 
@@ -59,6 +59,27 @@ function toggleAttempsElement(attemps) {
     return attempsElement.appendChild(attempsChildElement);
 }
 
+/**
+ * Let you play again if you have won or lost
+ * @param {sting} message Choose your message for the winning/losing
+ */
+function getWinOrLoseElement(message) {
+    postGameCard.classList.add('post-game-card');
+    postGameCard.classList.remove('post-game-card-none');
+    cardElement.remove('card');
+    playAgainMessageElement.innerHTML = (`<div>${message}<br>${playAgain}</div>`)
+    playAgainButtonElement.addEventListener('click', function(){
+        location.reload();
+    })
+    notPlayAgainButtonElement.addEventListener('click', function() {
+        postGameCard.classList.add('post-game-card-button-remove');
+        postGameCard.classList.remove('post-game-card');
+
+        playAgainMessageElement.innerHTML = (`Peccato!`);
+        playAgainButtonElement.classList.add('play-again-button-none');
+        notPlayAgainButtonElement.classList.add('play-again-button-none');
+    })
+}
 
 // Crea le variabili necessarie
 let result = 0;
@@ -101,26 +122,11 @@ buttonElement.addEventListener('click', function(event) {
         attemps -= 1;
         toggleAttempsElement(attemps);
     } else if (randomNumber === number) {
-        message = 'Congratulazioni!';
-        postGameCard.classList.add('post-game-card');
-        postGameCard.classList.remove('post-game-card-none');
-        cardElement.remove('card');
-        playAgainMessageElement.innerHTML = (`<div>${message}<br>${playAgain}</div>`)
-        playAgainButtonElement.addEventListener('click', function(){
-            
-        })
-        
-
-        // tipsElement.innerHTML = `<div>Congratulazioni!</div>`;
-        // let playAgain = prompt('Vuoi giocare di nuovo?');
-        // if (playAgain) location.reload();
+        getWinOrLoseElement('Congratulazioni!')
     }
 
     // Controlla se il numero di attemps è pari a 0, in caso game over
     if (attemps < 1) {
-        attempsElement.removeChild(attempsElement.firstElementChild)
-        attempsElement.innerHTML = `Hai perso!`
-        let playAgain = prompt('Vuoi giocare di nuovo?');
-        if (playAgain) location.reload();
+        getWinOrLoseElement('Hai perso!')
     }
 })
