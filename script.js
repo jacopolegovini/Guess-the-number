@@ -20,6 +20,14 @@ const buttonElement = document.querySelector('button');
 const attempsElement = document.querySelector('.attemps');
 const pugElement = document.querySelector('.pug-image-none');
 const cardElement = document.getElementById('card');
+const placeholderElement = document.querySelector('placeholder');
+const mainDisplayElement = document.querySelector('.main-display');
+const postGameCard = document.getElementById('post-game-card');
+const playAgainMessageElement = document.querySelector('.play-again-message');
+const playAgainButtonElement = document.querySelector('.btn-play-again');
+const notPlayAgainButtonElement = document.querySelector('.btn-play-again');
+
+
 
 
 // Crea le funzioni necessarie
@@ -34,7 +42,7 @@ const randomNumberFunction = max => Math.floor(Math.random() * max) + 1;
  * @param {string} higherOrLower 
  */
 function toggleTipsElement(higherOrLower) {
-    tipsElement.innerHTML = `<div>Prova con un numero ${higherOrLower}</div>`;
+    tipsElement.innerHTML = `<div>Tips: <i>prova con un numero ${higherOrLower}</i></div>`;
     tipsElement.classList.remove('tips-none');
     tipsElement.classList.add('tips');
 }
@@ -56,6 +64,8 @@ function toggleAttempsElement(attemps) {
 let result = 0;
 let max = 100;
 let attemps = 10;
+let message = '';
+let playAgain = 'Vuoi giocare di nuovo?';
 
 
 // Fai partire la funzione random
@@ -65,14 +75,14 @@ const randomNumber = randomNumberFunction(max);
 // Al click genera un evento
 buttonElement.addEventListener('click', function(event) {
     event.preventDefault();
+    
+    // Leggi il valore inserito dall'utente
+    const number = parseInt(numberElement.value);
+    if (isNaN(number)) return;
 
     // Modifica le dimensioni della carta a seconda del testo interno 
     cardElement.classList.add('card-dimension-higher')
     cardElement.classList.remove('card-dimension')
-
-    // Leggi il valore inserito dall'utente
-    const number = parseInt(numberElement.value);
-    if (isNaN(number)) return;
 
     console.log('randomNumber: ' + randomNumber + ' input-number: ' + number)
     
@@ -91,9 +101,19 @@ buttonElement.addEventListener('click', function(event) {
         attemps -= 1;
         toggleAttempsElement(attemps);
     } else if (randomNumber === number) {
-        tipsElement.innerHTML = `<div>Congratulazioni!</div>`;
-        let playAgain = prompt('Vuoi giocare di nuovo?');
-        if (playAgain) location.reload();
+        message = 'Congratulazioni!';
+        postGameCard.classList.add('post-game-card');
+        postGameCard.classList.remove('post-game-card-none');
+        cardElement.remove('card');
+        playAgainMessageElement.innerHTML = (`<div>${message}<br>${playAgain}</div>`)
+        playAgainButtonElement.addEventListener('click', function(){
+            
+        })
+        
+
+        // tipsElement.innerHTML = `<div>Congratulazioni!</div>`;
+        // let playAgain = prompt('Vuoi giocare di nuovo?');
+        // if (playAgain) location.reload();
     }
 
     // Controlla se il numero di attemps è pari a 0, in caso game over

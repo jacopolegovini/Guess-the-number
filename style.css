@@ -21,17 +21,28 @@ body {
     text-align: center;
 }
 
+.card-none {
+    display: none;
+}
+
 .card-dimension {
-    width: 400px;
+    width: 350px;
     height: 150px;
 }
 
 .card-dimension-higher {
     height: 200px;
+    width: 350px;
+
 }
 
 /* Title */
-
+.title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-bottom: 1px solid #0077b6;
+    padding-bottom: 10px;
+}
 
 /* Tips */
 .tips {
@@ -48,10 +59,19 @@ input {
     border: 1px solid #0077b6;
 }
 
+.input-button {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+}
+
 .btn-css {
     background-color: #0077b6;
     color: white;
     border-radius: 20px;
+    cursor: pointer;
+    padding: 6px 12px;
+    border: 1px solid #0077b6;
 }
 
 
@@ -65,4 +85,45 @@ input {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+
+/* * Post game card */
+.post-game-card-none {
+    display: none;
+}
+
+.post-game-card {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    height: 250px;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.btn-post-game-card-dimension {
+    padding: 12px 35px;
+    font-size: 1.2rem;
+}
+
+/* Media query */
+@media screen and (max-width: 425px) {
+    .card-dimension {
+        width: 250px;
+        height: 200px;    
+    }
+
+    .card-dimension-higher {
+        width: 250px;
+        height: 250px;
+    }
+
+    .input-button {
+        flex-direction: column;
+        justify-content: space-around;
+        gap: 30px;
+    }
 }
