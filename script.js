@@ -41,18 +41,10 @@ function toggleTipsElement(higherOrLower) {
  * @returns Complete sentence
  */
 function toggleAttempsElement(attemps) {
-    if (attemps < 10) {
-        const attempsChildElement = document.createElement("div");
-        const attempsChildTextElement = document.createTextNode('Ti rimangono ancora ' + attemps + ' tentativi.');
-        attempsChildElement.appendChild(attempsChildTextElement);
-        return attempsElement.appendChild(attempsChildElement);
-    } else {
-        const attempsChildElement = document.createElement("div");
-        attempsChildElement.classList.add('test')
-        const attempsChildTextElement = document.createTextNode('Ti rimangono ancora ' + attemps + ' tentativi.');
-        attempsChildElement.appendChild(attempsChildTextElement);
-        return attempsElement.appendChild(attempsChildElement);
-    }
+    const attempsChildElement = document.createElement("div");
+    const attempsChildTextElement = document.createTextNode('Ti rimangono ancora ' + attemps + ' tentativi.');
+    attempsChildElement.appendChild(attempsChildTextElement);
+    return attempsElement.appendChild(attempsChildElement);
 }
 
 // Crea le variabili necessarie
@@ -69,14 +61,13 @@ buttonElement.addEventListener('click', function(event) {
     event.preventDefault();
     
     // Leggi il valore inserito dall'utente
-    const number = numberElement.value;
+    const number = parseInt(numberElement.value);
 
     console.log('randomNumber: ' + randomNumber + ' input-number: ' + number)
     
-    if (attemps !== 10) {
-        attempsElement.removeChild(attempsElement.firstElementChild);
-    }
-
+    // Controlla se sono presenti altri elementi e cancellali
+    if (attemps !== 10) attempsElement.removeChild(attempsElement.firstElementChild)
+        
     // Crea un if con i tre casi: maggiore, minore, uguale
     if (randomNumber > number) {
         const higher = 'maggiore';
@@ -88,9 +79,17 @@ buttonElement.addEventListener('click', function(event) {
         toggleTipsElement(lower)
         attemps -= 1;
         toggleAttempsElement(attemps);
-
-    } else {
+    } else if (randomNumber === number) {
         tipsElement.innerHTML = `<div>Congratulazioni!</div>`;
-        location.reload();
+        let playAgain = prompt('Vuoi giocare di nuovo?');
+        if (playAgain) location.reload();
+    }
+
+    // Controlla se il numero di attemps è pari a 0, in caso game over
+    if (attemps < 1) {
+        attempsElement.removeChild(attempsElement.firstElementChild)
+        attempsElement.innerHTML = `Hai perso!`
+        let playAgain = prompt('Vuoi giocare di nuovo?');
+        if (playAgain) location.reload();
     }
 })
