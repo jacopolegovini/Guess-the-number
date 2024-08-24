@@ -28,6 +28,10 @@ body {
 
 /* Tips */
 .tips {
+    display: block;
+}
+
+.tips-none {
     display: none;
 }
 
